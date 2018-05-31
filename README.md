@@ -8,6 +8,10 @@
 
 This screensaver module is a Vue component meant for the morsecodemirror smart mirror project.
 
+## Contributing
+
+If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcomed.
+
 ## Licensing
 
 The code in this project is licensed under MIT license with the exception of

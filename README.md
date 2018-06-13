@@ -17,10 +17,12 @@ This module creates a screensaver for the MorseCodeMirror project.
 ### Installation
 
 **via npm**
-    npm i @morsecodemedia/morsecodemirror-screensaver
+
+`npm i @morsecodemedia/morsecodemirror-screensaver`
 
 **via yarn**
-    yarn add @morsecodemedia/morsecodemirror-screensaver
+
+`yarn add @morsecodemedia/morsecodemirror-screensaver`
 
 
 ### Contributing

@@ -1,7 +1,7 @@
 <template>
   <div id="wrapper">
     <main>
-      <GoHome></GoHome>
+      <go-home></go-home>
       <picture
         v-for="picture in pictures"
         :key="picture.id">
@@ -15,46 +15,52 @@
 </template>
 
 <script>
-  import GoHome from './GoHome'
-  import { TimelineMax } from 'gsap'
-  import path from 'path'
-  import { remote } from 'electron'
+  import config           from './morsecodemirror.config.json'
+  import goHome           from './go-home'
+  import { TimelineMax }  from 'gsap'
+  import path             from 'path'
+  import { remote }       from 'electron'
   const fs = require('fs')
-  const screensaverImgs = path.join(remote.app.getPath('desktop'), 'screensaver/')
+  const screensaverDir = path.join(remote.app.getPath('desktop'), 'screensaver/')
 
   var tl = new TimelineMax({repeat:-1})
 
-  var fadeConfig = {
-    fadeSpeed: 4,
-    displayLength: 4
-  }
-
   export default {
     name: 'Screensaver',
-    components: { GoHome },
+    components: { goHome },
     data: function() {
       return {
         pictures: [],
+        fadeConfig : {
+          fadeSpeed: 4,
+          displayLength: 4
+        },
       }
     },
     updated () {
       tl.clear()
       this.pictures.forEach((picture) => {
         let el = document.querySelector('#'+picture.id)
-        tl.to(el, fadeConfig.fadeSpeed, {alpha: 1}, "-="+fadeConfig.fadeSpeed)
-        tl.to('#'+picture.id, fadeConfig.displayLength, {alpha: 0}, "+="+(fadeConfig.fadeSpeed+fadeConfig.displayLength))
+        tl.to(el, this.fadeConfig.fadeSpeed, {alpha: 1}, "-="+this.fadeConfig.fadeSpeed)
+        tl.to('#'+picture.id, this.fadeConfig.displayLength, {alpha: 0}, "+="+(this.fadeConfig.fadeSpeed+this.fadeConfig.displayLength))
       })
       tl.play()
     },
     beforeMount () {
-      fs.readdir(screensaverImgs, (err, files) => {
+      fs.readdir(screensaverDir, (err, files) => {
         files.forEach((file,i) => {
           this.pictures.push({
-            href: 'file://'+screensaverImgs+file,
+            href: 'file://'+screensaverDir+file,
             id: 'picture-'+i,
             })
         })
       })
+      if (config.fadeConfig.fadeSpeed && config.fadeConfig.fadeSpeed.length > 0) {
+        this.fadeConfig.fadeSpeed = config.fadeConfig.fadeSpeed
+      }
+      if (config.fadeConfig.displayLength && config.fadeConfig.displayLength.length > 0) {
+        this.fadeConfig.displayLength = config.fadeConfig.displayLength
+      }
     },
   }
 </script>

@@ -17,7 +17,15 @@
     "type": "git",
     "url": "git+https://github.com/morsecodemedia/morsecodemirror-screensaver.git"
   },
-  "keywords": [],
+  "keywords": [
+    "Vue",
+    "Electron",
+    "Screensaver",
+    "Greensock",
+    "GSAP",
+    "Instagram",
+    "Filters"
+  ],
   "author": "brandonmorse <brandon@morsecodemedia.com> (https://www.morsecodemedia.com)",
   "license": "MIT",
   "bugs": {
